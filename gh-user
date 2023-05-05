@@ -10,6 +10,8 @@ echo -e -n '\nToken Type: '
 token=$(gh auth token)
 if [[ $token == ghp_* ]]; then
   echo 'PAT'
+elif [[ $token == github_pat_* ]]; then
+  echo 'PATV2-Fine Grained Tokens'
 elif [[ $token == gho_* ]]; then
   echo 'OAuth'
 elif [[ $token == ghu_* ]]; then
@@ -17,7 +19,7 @@ elif [[ $token == ghu_* ]]; then
 elif [[ $token == ghs_* ]]; then
         echo 'Server to Server Token'
 elif [[ $token == ghr_* ]]; then
-        echo 'Refresh Token'
+        echo 'Refresh Token'        
 else
   echo 'Unknown'
 fi
