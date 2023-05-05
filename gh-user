@@ -15,7 +15,7 @@ elif [[ $token == github_pat_* ]]; then
 elif [[ $token == gho_* ]]; then
   echo 'OAuth'
 elif [[ $token == ghu_* ]]; then
-    echo 'User to Server Token'
+    echo 'OAuth GH App (User to Server Token)'
 elif [[ $token == ghs_* ]]; then
         echo 'Server to Server Token'
 elif [[ $token == ghr_* ]]; then
