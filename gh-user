@@ -1,35 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Hello gh-user!"
+echo 'User data:'
+gh api user --jq '.login, .name,.email'
+echo -e -n '\nUser Scopes: '
+gh api rate_limit --include --silent | grep 'X-Oauth-Scopes:' | sed 's/X-Oauth-Scopes: //g'
 
-# Snippets to help get started:
+echo -e -n '\nToken Type: '
+token=$(gh auth token)
+if [[ $token == ghp_* ]]; then
+  echo 'PAT'
+elif [[ $token == gho_* ]]; then
+  echo 'OAuth'
+elif [[ $token == ghu_* ]]; then
+    echo 'User to Server Token'
+elif [[ $token == ghs_* ]]; then
+        echo 'Server to Server Token'
+elif [[ $token == ghr_* ]]; then
+        echo 'Refresh Token'
+else
+  echo 'Unknown'
+fi
 
-# Determine if an executable is in the PATH
-# if ! type -p ruby >/dev/null; then
-#   echo "Ruby not found on the system" >&2
-#   exit 1
-# fi
-
-# Pass arguments through to another command
-# gh issue list "$@" -R cli/cli
-
-# Using the gh api command to retrieve and format information
-# QUERY='
-#   query($endCursor: String) {
-#     viewer {
-#       repositories(first: 100, after: $endCursor) {
-#         nodes {
-#           nameWithOwner
-#           stargazerCount
-#         }
-#       }
-#     }
-#   }
-# '
-# TEMPLATE='
-#   {{- range $repo := .data.viewer.repositories.nodes -}}
-#     {{- printf "name: %s - stargazers: %v\n" $repo.nameWithOwner $repo.stargazerCount -}}
-#   {{- end -}}
-# '
-# exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}"
