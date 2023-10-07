@@ -4,6 +4,9 @@ Show information about the user currently logged (or token being used) in with [
 
 This means either the user logged it or token being used (eg: GH_TOKEN).
 
+> [!NOTE]
+> The CLI `auth status` does the same thing as this extension with the exception of identifying the token type. 
+
 ## Why?
 
 
